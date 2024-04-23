@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\User\\source\\repos\\WebApi\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B21A0B00-5AB7-4EF7-97B3-B444650E0242}|WebApi\\WebApi.csproj|c:\\users\\user\\source\\repos\\webapi\\webapi\\model\\employee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B21A0B00-5AB7-4EF7-97B3-B444650E0242}|WebApi\\WebApi.csproj|solutionrelative:webapi\\model\\employee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Employee.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WebApi\\WebApi\\Model\\Employee.cs",
+              "RelativeDocumentMoniker": "WebApi\\Model\\Employee.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WebApi\\WebApi\\Model\\Employee.cs",
+              "RelativeToolTip": "WebApi\\Model\\Employee.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-23T18:17:25.27Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
