@@ -11,12 +11,13 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("WebApi")]
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("c52a4eed-5b21-4a54-976b-a0403f21d8e0")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("WebAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+61a63ebe535d759320cdd216eeac270538f43853")]
-[assembly: System.Reflection.AssemblyProductAttribute("WebApi")]
-[assembly: System.Reflection.AssemblyTitleAttribute("WebApi")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d050d005e80914bb8ca2ccbef051e7125443a65e")]
+[assembly: System.Reflection.AssemblyProductAttribute("WebAPI")]
+[assembly: System.Reflection.AssemblyTitleAttribute("WebAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 
 // Gerado pela classe WriteCodeFragment do MSBuild.
