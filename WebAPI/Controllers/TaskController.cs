@@ -1,8 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Linq;
-using WebAPI.Models;
-using WebAPI.Services;
+using ModelsTask = WebAPI.Models.Task; // Alias para WebAPI.Models.Task
+using System.Threading.Tasks; // Importe o namespace System.Threading.Tasks
 
 namespace WebAPI.Controllers
 {
@@ -18,17 +17,19 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<Task>> GetTasks()
+        public ActionResult<List<ModelsTask>> GetTasks()
         {
             var tasks = _taskService.GetTasks();
             return Ok(tasks);
         }
 
         [HttpPost]
-        public ActionResult<Task> CreateTask(Task task)
+        public ActionResult<ModelsTask> CreateTask([FromBody] ModelsTask task)
         {
             var newTask = _taskService.CreateTask(task);
             return Ok(newTask);
         }
+
+        // Outros métodos CRUD (UpdateTask, DeleteTask) podem ser implementados aqui
     }
 }
