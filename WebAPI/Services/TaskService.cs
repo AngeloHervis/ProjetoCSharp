@@ -1,26 +1,25 @@
 using System.Collections.Generic;
+using ModelsTask = WebAPI.Models.Task;
 using System.Linq;
-using WebAPI.Models;
-
+using System.Threading.Tasks;
+using WebAPI.Services;
 namespace WebAPI.Services
 {
     public class TaskService
     {
-        private readonly List<Models.Task> _tasks = new List<Models.Task>(); // Use o alias Models.Task
+        private readonly List<ModelsTask> _tasks = new List<ModelsTask>();
         private int _nextId = 1;
 
-        public List<Models.Task> GetTasks() // Use o alias Models.Task
+        public List<ModelsTask> GetTasks()
         {
             return _tasks;
         }
 
-        public Models.Task CreateTask(Models.Task task) // Use o alias Models.Task
+        public ModelsTask CreateTask(ModelsTask task)
         {
             task.Id = _nextId++;
             _tasks.Add(task);
             return task;
         }
-
-        // Outros métodos CRUD (UpdateTask, DeleteTask) podem ser implementados aqui
     }
 }

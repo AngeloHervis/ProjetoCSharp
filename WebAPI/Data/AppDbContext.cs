@@ -1,15 +1,19 @@
 using Microsoft.EntityFrameworkCore;
-using WebAPI.Models; // Importe o namespace WebAPI.Models
+using WebAPI.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace WebAPI.Data
 {
     public class AppDbContext : DbContext
     {
-        public DbSet<User> Users { get; set; } // Referência para a classe User
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
-            optionsBuilder.UseSqlite("Data Source=app.db");
         }
+
+        public DbSet<User> Users { get; set; }
+        public DbSet<Models.Task> Tasks { get; set; }
     }
 }

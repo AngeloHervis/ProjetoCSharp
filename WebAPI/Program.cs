@@ -5,7 +5,6 @@ using WebAPI.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configuração do serviço do Entity Framework
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite("Data Source=app.db"));
 
