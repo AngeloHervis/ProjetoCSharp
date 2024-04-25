@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 
 namespace WebAPI.Models
 {
-    public class DonationDBContext
+    public class DonationDBContext :DbContext
     {
+        public DonationDBContext
     }
 }
