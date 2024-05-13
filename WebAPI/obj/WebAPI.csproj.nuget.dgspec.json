@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Patricia\\Documents\\GitHub\\TreinoCsharp\\WebAPI\\WebAPI.csproj": {}
+    "C:\\Users\\Nicolas G\\Documents\\GitHub\\ProjetoCsharp\\WebAPI\\WebAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Patricia\\Documents\\GitHub\\TreinoCsharp\\WebAPI\\WebAPI.csproj": {
+    "C:\\Users\\Nicolas G\\Documents\\GitHub\\ProjetoCsharp\\WebAPI\\WebAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Patricia\\Documents\\GitHub\\TreinoCsharp\\WebAPI\\WebAPI.csproj",
+        "projectUniqueName": "C:\\Users\\Nicolas G\\Documents\\GitHub\\ProjetoCsharp\\WebAPI\\WebAPI.csproj",
         "projectName": "WebAPI",
-        "projectPath": "C:\\Users\\Patricia\\Documents\\GitHub\\TreinoCsharp\\WebAPI\\WebAPI.csproj",
-        "packagesPath": "C:\\Users\\Patricia\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Patricia\\Documents\\GitHub\\TreinoCsharp\\WebAPI\\obj\\",
+        "projectPath": "C:\\Users\\Nicolas G\\Documents\\GitHub\\ProjetoCsharp\\WebAPI\\WebAPI.csproj",
+        "packagesPath": "C:\\Users\\Nicolas G\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Nicolas G\\Documents\\GitHub\\ProjetoCsharp\\WebAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Patricia\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Nicolas G\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -46,6 +46,12 @@
             "Assert": {
               "target": "Package",
               "version": "[4.2.1, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.4, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
