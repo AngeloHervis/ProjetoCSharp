@@ -27,7 +27,7 @@ Content-Type: application/json
     "nome" : "Troca",
     "cpf"  : "188.922.000.92",
     "genero" : "feminino",
-    "email"  : "Adrian@gmail"
+    "email"  : "Adrian@gmail.com"
 }
 
 
