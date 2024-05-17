@@ -5,7 +5,8 @@ POST http://localhost:5218/ListaDeTarefas/cadastrar/tarefa
 Content-Type: application/json
 
 {
-    "nome" : "tarefa"
+    "nome" : "tarefa",
+    "DescricaoTarefa" : "arrumar a cama"
 }
 
 #### Buscar tarefa
@@ -22,7 +23,8 @@ PUT http://localhost:5218/hospital/atualizar/tarefa/d3388b17-3f07-48d6-a4c7-50d3
 Content-Type: application/json
 
 {
-    "nome" : "TESTE2"
+    "nome" : "tarefa teste 2",
+    "DescricaoTarefa" : "arrumar a mesa"
 }
 
 #### Deletar tarefa

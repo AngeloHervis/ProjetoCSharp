@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7vR7ds1ROdlDHKj4+jpkWq4XC+PxwYPgazjceIcA9V2FS8hr3E3P4GxgHG3Ns4K4rIW+cTbl+eKtG8gwt0/igQ==",
+  "dgSpecHash": "krfxvGSHekJdq+2y2NgVJznEPK6BqS4cInbcIj4xvxhYYAwyv6PojUYuK5BjPUj8+gkdD7zYUl/1gNzO49gFLA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Nicolas G\\Documents\\GitHub\\TrabalhoCsharp\\ListaDeTarefas\\ListaDeTarefas.csproj",
+  "projectFilePath": "c:\\Users\\Nicolas G\\Documents\\GitHub\\ProjetoCsharp\\ListaDeTarefas\\ListaDeTarefas.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Nicolas G\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Nicolas G\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",

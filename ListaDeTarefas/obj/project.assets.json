@@ -2539,11 +2539,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Nicolas G\\Documents\\GitHub\\TrabalhoCsharp\\ListaDeTarefas\\ListaDeTarefas.csproj",
+      "projectUniqueName": "c:\\Users\\Nicolas G\\Documents\\GitHub\\ProjetoCsharp\\ListaDeTarefas\\ListaDeTarefas.csproj",
       "projectName": "ListaDeTarefas",
-      "projectPath": "C:\\Users\\Nicolas G\\Documents\\GitHub\\TrabalhoCsharp\\ListaDeTarefas\\ListaDeTarefas.csproj",
+      "projectPath": "c:\\Users\\Nicolas G\\Documents\\GitHub\\ProjetoCsharp\\ListaDeTarefas\\ListaDeTarefas.csproj",
       "packagesPath": "C:\\Users\\Nicolas G\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Nicolas G\\Documents\\GitHub\\TrabalhoCsharp\\ListaDeTarefas\\obj\\",
+      "outputPath": "c:\\Users\\Nicolas G\\Documents\\GitHub\\ProjetoCsharp\\ListaDeTarefas\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Nicolas G\\AppData\\Roaming\\NuGet\\NuGet.Config"
