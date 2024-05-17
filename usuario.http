@@ -1,0 +1,35 @@
+#### Cadastrar usuario
+
+POST http://localhost:5218/ListaDeTarefas/cadastrar/usuario
+Content-Type: application/json
+
+{
+    "nome" : "teste1",
+    "cpf"  : "125.714.329-82",
+    "genero" : "masculino",
+    "email"  : "nicolas@gmail.com"
+}
+
+#### Buscar usuario
+
+GET http://localhost:5218/ListaDeTarefas/buscar/usuario/d3388b17-3f07-48d6-a4c7-50d38f8f136b
+
+#### Listar usuario
+
+GET http://localhost:5218/ListaDeTarefas/listar/usuario
+
+#### Alterar usuario
+ 
+PUT http://localhost:5218/hospital/atualizar/usuario/d3388b17-3f07-48d6-a4c7-50d38f8f136b
+Content-Type: application/json
+
+{
+    "nome" : "Troca",
+    "cpf"  : "188.922.000.92",
+    "genero" : "feminino",
+    "email"  : "Adrian@gmail"
+}
+
+
+#### Deletar usuario
+DELETE http://localhost:5218/hospital/deletar/usuario/d3388b17-3f07-48d6-a4c7-50d38f8f136b

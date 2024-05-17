@@ -1,0 +1,29 @@
+
+#### Cadastrar tarefa
+
+POST http://localhost:5218/ListaDeTarefas/cadastrar/tarefa
+Content-Type: application/json
+
+{
+    "nome" : "tarefa"
+}
+
+#### Buscar tarefa
+
+GET http://localhost:5218/ListaDeTarefas/buscar/tarefa/d3388b17-3f07-48d6-a4c7-50d38f8f136b
+
+#### Listar tarefa
+
+GET http://localhost:5218/ListaDeTarefas/listar/tarefa
+
+#### Alterar tarefa
+ 
+PUT http://localhost:5218/hospital/atualizar/tarefa/d3388b17-3f07-48d6-a4c7-50d38f8f136b
+Content-Type: application/json
+
+{
+    "nome" : "TESTE2"
+}
+
+#### Deletar tarefa
+DELETE http://localhost:5218/hospital/deletar/tarefa/d3388b17-3f07-48d6-a4c7-50d38f8f136b
