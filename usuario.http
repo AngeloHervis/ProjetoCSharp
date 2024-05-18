@@ -12,7 +12,7 @@ Content-Type: application/json
 
 #### Buscar usuario
 
-GET http://localhost:5218/ListaDeTarefas/buscar/usuario/d3388b17-3f07-48d6-a4c7-50d38f8f136b
+GET http://localhost:5218/ListaDeTarefas/buscar/usuario/2d3a712a-d85d-4618-838f-c77fcc7b9bf8
 
 #### Listar usuario
 
@@ -20,7 +20,7 @@ GET http://localhost:5218/ListaDeTarefas/listar/usuario
 
 #### Alterar usuario
  
-PUT http://localhost:5218/hospital/atualizar/usuario/d3388b17-3f07-48d6-a4c7-50d38f8f136b
+PUT http://localhost:5218/ListaDeTarefas/atualizar/usuario/2d3a712a-d85d-4618-838f-c77fcc7b9bf8
 Content-Type: application/json
 
 {
@@ -32,4 +32,4 @@ Content-Type: application/json
 
 
 #### Deletar usuario
-DELETE http://localhost:5218/hospital/deletar/usuario/d3388b17-3f07-48d6-a4c7-50d38f8f136b
+DELETE http://localhost:5218/ListaDeTarefas/deletar/usuario/2d3a712a-d85d-4618-838f-c77fcc7b9bf8

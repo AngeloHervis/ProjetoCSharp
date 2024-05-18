@@ -11,7 +11,7 @@ Content-Type: application/json
 
 #### Buscar tarefa
 
-GET http://localhost:5218/ListaDeTarefas/buscar/tarefa/d3388b17-3f07-48d6-a4c7-50d38f8f136b
+GET http://localhost:5218/ListaDeTarefas/buscar/tarefa/1cdc951d-e4fc-4ab6-bb19-4ce3d3d435c6
 
 #### Listar tarefa
 
@@ -19,7 +19,7 @@ GET http://localhost:5218/ListaDeTarefas/listar/tarefa
 
 #### Alterar tarefa
  
-PUT http://localhost:5218/hospital/atualizar/tarefa/d3388b17-3f07-48d6-a4c7-50d38f8f136b
+PUT http://localhost:5218/ListaDeTarefas/atualizar/tarefa/1cdc951d-e4fc-4ab6-bb19-4ce3d3d435c6
 Content-Type: application/json
 
 {
@@ -28,4 +28,4 @@ Content-Type: application/json
 }
 
 #### Deletar tarefa
-DELETE http://localhost:5218/hospital/deletar/tarefa/d3388b17-3f07-48d6-a4c7-50d38f8f136b
+DELETE http://localhost:5218/ListaDeTarefas/deletar/tarefa/1cdc951d-e4fc-4ab6-bb19-4ce3d3d435c6

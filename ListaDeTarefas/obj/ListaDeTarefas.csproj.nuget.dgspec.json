@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\angelo.hervis\\Documents\\GitHub\\ProjetoCsharp\\ListaDeTarefas\\ListaDeTarefas.csproj": {}
+    "C:\\Users\\Nicolas G\\Documents\\GitHub\\ProjetoCsharp\\ListaDeTarefas\\ListaDeTarefas.csproj": {}
   },
   "projects": {
-    "C:\\Users\\angelo.hervis\\Documents\\GitHub\\ProjetoCsharp\\ListaDeTarefas\\ListaDeTarefas.csproj": {
+    "C:\\Users\\Nicolas G\\Documents\\GitHub\\ProjetoCsharp\\ListaDeTarefas\\ListaDeTarefas.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\angelo.hervis\\Documents\\GitHub\\ProjetoCsharp\\ListaDeTarefas\\ListaDeTarefas.csproj",
+        "projectUniqueName": "C:\\Users\\Nicolas G\\Documents\\GitHub\\ProjetoCsharp\\ListaDeTarefas\\ListaDeTarefas.csproj",
         "projectName": "ListaDeTarefas",
-        "projectPath": "C:\\Users\\angelo.hervis\\Documents\\GitHub\\ProjetoCsharp\\ListaDeTarefas\\ListaDeTarefas.csproj",
-        "packagesPath": "C:\\Users\\angelo.hervis\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\angelo.hervis\\Documents\\GitHub\\ProjetoCsharp\\ListaDeTarefas\\obj\\",
+        "projectPath": "C:\\Users\\Nicolas G\\Documents\\GitHub\\ProjetoCsharp\\ListaDeTarefas\\ListaDeTarefas.csproj",
+        "packagesPath": "C:\\Users\\Nicolas G\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Nicolas G\\Documents\\GitHub\\ProjetoCsharp\\ListaDeTarefas\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\angelo.hervis\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Nicolas G\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -73,7 +73,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
