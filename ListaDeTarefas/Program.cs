@@ -134,7 +134,7 @@ app.MapDelete(
 
 //ENDPOINT PARA CADASTRAR usuario
 app.MapPost(
-    "ListaDeTarefas/cadastrar/usuario",
+    "/ListaDeTarefas/cadastrar/usuario",
     ([FromBody] Usuario usuario, [FromServices] AppDbContext context) =>
     {
         Usuario? usuarioBuscado = context.Usuarios.FirstOrDefault(n => n.Cpf == usuario.Cpf);
@@ -167,7 +167,7 @@ app.MapGet(
 
 //ENDPOINT PARA LISTAR usuario
 app.MapGet(
-    "ListaDeTarefas/listar/usuario",
+    "/ListaDeTarefas/listar/usuario",
     ([FromServices] AppDbContext context) =>
     {
         if (context.Usuarios.Any())
@@ -175,23 +175,6 @@ app.MapGet(
             return Results.Ok(context.Usuarios.ToList());
         }
         return Results.NotFound("Usuarios não encontrados!");
-    }
-);
-
-//ENDPOINT PARA DELETAR usuario
-app.MapDelete(
-    "/ListaDeTarefas/deletar/usuario/{id}",
-    ([FromRoute] string id, [FromServices] AppDbContext context) =>
-    {
-        Usuario? usuarioParaDeletar = context.Usuarios.FirstOrDefault(n => n.Id == id);
-
-        if (usuarioParaDeletar is null)
-        {
-            return Results.NotFound("Usuario não encontrado!");
-        }
-        context.Usuarios.Remove(usuarioParaDeletar);
-        context.SaveChanges();
-        return Results.Ok("Usuario deletado com sucesso");
     }
 );
 
@@ -222,5 +205,24 @@ app.MapPut(
         return Results.Ok("Usuario alterado com sucesso!");
     }
 );
+
+
+//ENDPOINT PARA DELETAR usuario
+app.MapDelete(
+    "/ListaDeTarefas/deletar/usuario/{id}",
+    ([FromRoute] string id, [FromServices] AppDbContext context) =>
+    {
+        Usuario? usuarioParaDeletar = context.Usuarios.FirstOrDefault(n => n.Id == id);
+
+        if (usuarioParaDeletar is null)
+        {
+            return Results.NotFound("Usuario não encontrado!");
+        }
+        context.Usuarios.Remove(usuarioParaDeletar);
+        context.SaveChanges();
+        return Results.Ok("Usuario deletado com sucesso");
+    }
+);
+
 
 app.Run();

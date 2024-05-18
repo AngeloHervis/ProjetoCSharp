@@ -20,7 +20,7 @@ GET http://localhost:5218/ListaDeTarefas/listar/usuario
 
 #### Alterar usuario
  
-PUT http://localhost:5218/ListaDeTarefas/atualizar/usuario/2d3a712a-d85d-4618-838f-c77fcc7b9bf8
+PUT http://localhost:5218/ListaDeTarefas/alterar/usuario/2d3a712a-d85d-4618-838f-c77fcc7b9bf8
 Content-Type: application/json
 
 {
@@ -29,7 +29,6 @@ Content-Type: application/json
     "genero" : "feminino",
     "email"  : "Adrian@gmail.com"
 }
-
 
 #### Deletar usuario
 DELETE http://localhost:5218/ListaDeTarefas/deletar/usuario/2d3a712a-d85d-4618-838f-c77fcc7b9bf8
