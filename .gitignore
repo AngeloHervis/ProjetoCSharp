@@ -1,0 +1,6 @@
+# pastas inuteis
+.vscode/
+.idea/
+.idea/*
+.obj/*
+.bin/*
