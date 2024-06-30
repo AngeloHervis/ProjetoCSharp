@@ -6,40 +6,43 @@ import axios from "axios";
 function ListarCategoria() {
   const [categorias, setCategorias] = useState<Categoria[]>([]);
 
-    useEffect(() => {
-        axios
-            .get("https://localhost:5272/api/categorias/listar")
-            .then((response) => {
-            setCategorias(response.data);
-            })
-            .catch((error) => {
-            console.error(error);
-            });
-        }, []);
+  useEffect(() => {
+    carregarCategorias();
+  }, []);
+
+  function carregarCategorias() {
+    axios
+      .get("http://localhost:5272/categoria/listar")
+      .then((response) => {
+        setCategorias(response.data);
+      })
+      .catch((error) => console.log(error));
+  }
 
   return (
     <div>
-      <h1>Listar Categoria</h1>
-      <Link to="/categoria/CadastrarCategoria">Cadastrar Categoria</Link>
+      <h1>Listagem de Categorias</h1>
+      <Link to="/categoria/cadastrarCategoria">Cadastrar</Link><br />
+      <Link to="/categoria/excluirCategoria">Excluir</Link><br />
+      <Link to="/categoria/editarCategoria">Editar</Link><br />
       <table>
         <thead>
           <tr>
+            <th>Id</th>
             <th>Nome</th>
-            <th>Criado em</th>
           </tr>
         </thead>
         <tbody>
           {categorias.map((categoria) => (
-            <tr key={categoria.id}>
+            <tr key={categoria.categoriaId}>
+              <td>{categoria.categoriaId}</td>
               <td>{categoria.nome}</td>
-              <td>{categoria.criadoEm}</td>
             </tr>
           ))}
         </tbody>
       </table>
-      <Link to="/categorias">Voltar</Link>
     </div>
-  )
+  );
 }
 
 export default ListarCategoria;

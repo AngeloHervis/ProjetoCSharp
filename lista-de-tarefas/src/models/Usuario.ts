@@ -1,6 +1,10 @@
+import { Tarefa } from "./Tarefa";
+
 export interface Usuario {
-    id: string;
-    nome: string;
-    email: string;
-    senha: string;
+  usuarioId: string;
+  nome: string;
+  email: string;
+  senha: string;
+  criadoEm: string;
+  tarefas?: Tarefa[];
 }

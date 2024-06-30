@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TarefasApi.Models;
 
@@ -10,9 +11,11 @@ using TarefasApi.Models;
 namespace TarefasApi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240630005605_Bora")]
+    partial class Bora
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.6");
@@ -78,14 +81,9 @@ namespace TarefasApi.Migrations
                     b.Property<string>("Titulo")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("UsuarioId")
-                        .HasColumnType("TEXT");
-
                     b.HasKey("TarefaId");
 
                     b.HasIndex("CategoriaId");
-
-                    b.HasIndex("UsuarioId");
 
                     b.ToTable("Tarefas");
                 });
@@ -118,18 +116,7 @@ namespace TarefasApi.Migrations
                         .WithMany()
                         .HasForeignKey("CategoriaId");
 
-                    b.HasOne("TarefasApi.Models.Usuario", "Usuario")
-                        .WithMany("Tarefas")
-                        .HasForeignKey("UsuarioId");
-
                     b.Navigation("Categoria");
-
-                    b.Navigation("Usuario");
-                });
-
-            modelBuilder.Entity("TarefasApi.Models.Usuario", b =>
-                {
-                    b.Navigation("Tarefas");
                 });
 #pragma warning restore 612, 618
         }

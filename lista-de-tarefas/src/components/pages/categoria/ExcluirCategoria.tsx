@@ -1,40 +1,67 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
 function ExcluirCategoria() {
-  const [id, setId] = useState<number>(0);
-  const [mensagem, setMensagem] = useState<string>("");
+  const [categorias, setCategorias] = useState([]);
+  const [categoriaSelecionada, setCategoriaSelecionada] = useState("");
 
-  async function excluirCategoria() {
-    try {
-      const response = await axios.delete(
-        `https://localhost:5272/api/categorias/excluir/${id}`
-      );
-      setMensagem("Categoria excluída com sucesso!");
-    } catch (error) {
-      setMensagem("Erro ao excluir categoria!");
+  useEffect(() => {
+    carregarCategorias();
+  }, []);
+
+  function carregarCategorias() {
+    axios
+      .get("http://localhost:5272/categoria/listar")
+      .then((response) => {
+        setCategorias(response.data);
+      })
+      .catch((error) => console.log(error));
+  }
+
+  function handleInputChange(event: React.ChangeEvent<HTMLSelectElement>) {
+    setCategoriaSelecionada(event.target.value);
+  }
+
+  function handleFormSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (!categoriaSelecionada) {
+      console.log("Selecione uma categoria para excluir.");
+      return;
     }
+
+    axios
+      .delete(`http://localhost:5272/categoria/excluir/${categoriaSelecionada}`)
+      .then((response) => {
+        console.log("Categoria excluída com sucesso:", response.data);
+        carregarCategorias();
+      })
+      .catch((error) => console.log(error));
   }
 
   return (
     <div>
-      <h1>Excluir Categoria</h1>
-      <form>
+      <h1>Exclusão de Categorias</h1>
+      <Link to="/categoria/listar">Listar</Link>
+      <form onSubmit={handleFormSubmit}>
         <div>
-          <label>Id:</label>
-          <input
-            type="number"
-            value={id}
-            onChange={(e) => setId(Number(e.target.value))}
-          />
+          <label htmlFor="categoria">Categoria</label>
+          <select
+            id="categoria"
+            name="categoria"
+            value={categoriaSelecionada}
+            onChange={handleInputChange}
+          >
+            <option value="">Selecione</option>
+            {categorias.map((categoria: any) => (
+              <option key={categoria.categoriaId} value={categoria.categoriaId}>
+                {categoria.nome}
+              </option>
+            ))}
+          </select>
         </div>
-        <button type="button" onClick={excluirCategoria}>
-          Excluir
-        </button>
+        <button type="submit">Excluir</button>
       </form>
-      <p>{mensagem}</p>
-      <Link to="/categorias">Voltar</Link>
     </div>
   );
 }

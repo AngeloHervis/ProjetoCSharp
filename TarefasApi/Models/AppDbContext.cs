@@ -1,16 +1,26 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace TarefasApi.Models;
-
-public class AppDbContext : DbContext
+namespace TarefasApi.Models
 {
-        public AppDbContext(DbContextOptions<AppDbContext> options)
-            : base(options)
+    public class AppDbContext : DbContext
+    {
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            optionsBuilder.UseSqlite("Data Source=Tarefas.db");
         }
 
-    public DbSet<Tarefa> Tarefas { get; set; }
-    public DbSet<Usuario> Usuarios { get; set; }
-    public DbSet<Categoria> Categorias { get; set; }
-    public DbSet<SubTarefa> SubTarefas { get; set; }
+        public DbSet<Tarefa> Tarefas { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Categoria> Categorias { get; set; }
+        public DbSet<SubTarefa> SubTarefas { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder
+                .Entity<Tarefa>()
+                .HasOne(t => t.Usuario)
+                .WithMany(u => u.Tarefas)
+                .HasForeignKey(t => t.UsuarioId);
+        }
+    }
 }

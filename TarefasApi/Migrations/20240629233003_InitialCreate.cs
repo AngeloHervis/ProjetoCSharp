@@ -15,9 +15,9 @@ namespace TarefasApi.Migrations
                 name: "Categorias",
                 columns: table => new
                 {
-                    CategoriaId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CriadoEm = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    CategoriaId = table.Column<string>(type: "TEXT", nullable: false),
+                    Nome = table.Column<string>(type: "TEXT", nullable: true),
+                    CriadoEm = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -28,12 +28,12 @@ namespace TarefasApi.Migrations
                 name: "SubTarefas",
                 columns: table => new
                 {
-                    SubTarefaId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    TarefaId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Titulo = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Descricao = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CriadoEm = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    SubTarefaId = table.Column<string>(type: "TEXT", nullable: false),
+                    TarefaId = table.Column<string>(type: "TEXT", nullable: true),
+                    Titulo = table.Column<string>(type: "TEXT", nullable: true),
+                    Descricao = table.Column<string>(type: "TEXT", nullable: true),
+                    CriadoEm = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Status = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -44,11 +44,11 @@ namespace TarefasApi.Migrations
                 name: "Usuarios",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Senha = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CriadoEm = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Id = table.Column<string>(type: "TEXT", nullable: false),
+                    Nome = table.Column<string>(type: "TEXT", nullable: true),
+                    Email = table.Column<string>(type: "TEXT", nullable: true),
+                    Senha = table.Column<string>(type: "TEXT", nullable: true),
+                    CriadoEm = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -59,12 +59,12 @@ namespace TarefasApi.Migrations
                 name: "Tarefas",
                 columns: table => new
                 {
-                    TarefaId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Titulo = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Descricao = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CriadoEm = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CategoriaId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    TarefaId = table.Column<string>(type: "TEXT", nullable: false),
+                    Titulo = table.Column<string>(type: "TEXT", nullable: true),
+                    Descricao = table.Column<string>(type: "TEXT", nullable: true),
+                    CriadoEm = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    CategoriaId = table.Column<string>(type: "TEXT", nullable: true),
+                    Status = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {

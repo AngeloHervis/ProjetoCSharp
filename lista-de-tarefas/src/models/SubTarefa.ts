@@ -1,7 +1,8 @@
 export interface SubTarefa {
-    SubTarefaId: string;
-    TarefaId: string;
-    Titulo: string;
-    CriadoEm: Date;
-    Status: string;
+    subTarefaId: string;
+    tarefaId: string;
+    titulo: string;
+    descricao: string;
+    criadoEm: Date;
+    status: string;
 }
