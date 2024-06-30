@@ -78,14 +78,9 @@ namespace TarefasApi.Migrations
                     b.Property<string>("Titulo")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("UsuarioId")
-                        .HasColumnType("TEXT");
-
                     b.HasKey("TarefaId");
 
                     b.HasIndex("CategoriaId");
-
-                    b.HasIndex("UsuarioId");
 
                     b.ToTable("Tarefas");
                 });
@@ -118,18 +113,7 @@ namespace TarefasApi.Migrations
                         .WithMany()
                         .HasForeignKey("CategoriaId");
 
-                    b.HasOne("TarefasApi.Models.Usuario", "Usuario")
-                        .WithMany("Tarefas")
-                        .HasForeignKey("UsuarioId");
-
                     b.Navigation("Categoria");
-
-                    b.Navigation("Usuario");
-                });
-
-            modelBuilder.Entity("TarefasApi.Models.Usuario", b =>
-                {
-                    b.Navigation("Tarefas");
                 });
 #pragma warning restore 612, 618
         }

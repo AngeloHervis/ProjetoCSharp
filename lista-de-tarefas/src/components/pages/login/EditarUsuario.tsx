@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { Usuario } from "../../../models/Usuario"; // Importe a interface Usuario
+import { Usuario } from "../../../models/Usuario";
 
 function EditarUsuario() {
-  const [usuarios, setUsuarios] = useState<Usuario[]>([]); // Tipagem correta
-  const [usuarioSelecionado, setUsuarioSelecionado] = useState<string>("");
-  const [novoNome, setNovoNome] = useState<string>("");
-  const [novoEmail, setNovoEmail] = useState<string>("");
-  const [novaSenha, setNovaSenha] = useState<string>("");
+  const [usuarios, setUsuarios] = useState<Usuario[]>([]);
+  const [usuarioSelecionado, setUsuarioSelecionado] = useState("");
+  const [novoNome, setNovoNome] = useState("");
+  const [novoEmail, setNovoEmail] = useState("");
+  const [novaSenha, setNovaSenha] = useState("");
 
   useEffect(() => {
     carregarUsuarios();
@@ -39,43 +39,44 @@ function EditarUsuario() {
     setNovaSenha(event.target.value);
   }
 
-  function handleFormSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    if (!usuarioSelecionado || !novoNome || !novoEmail || !novaSenha) {
-      console.log("Selecione um usuário e insira um novo nome, email e senha.");
-      return;
-    }
-
-    const usuarioAtualizado = {
-      usuarioId: usuarioSelecionado,
-      nome: novoNome,
-      email: novoEmail,
-      senha: novaSenha,
-    };
-
-    axios
-      .put(
-        `http://localhost:5272/usuario/editar/${usuarioSelecionado}`,
-        usuarioAtualizado
-      )
-      .then((response) => {
-        console.log("Usuário editado com sucesso:", response.data);
-        carregarUsuarios();
-        setUsuarioSelecionado("");
-        setNovoNome("");
-        setNovoEmail("");
-        setNovaSenha("");
-      })
-      .catch((error) => console.log(error));
+function handleFormSubmit(event: React.FormEvent<HTMLFormElement>) {
+  event.preventDefault();
+  if (!usuarioSelecionado || !novoNome || !novoEmail || !novaSenha) {
+    console.log("Erro: Todos os campos são obrigatórios.");
+    return;
   }
+
+  const usuarioAtualizado = {
+    nome: novoNome,
+    email: novoEmail,
+    senha: novaSenha,
+  };
+
+  console.log("Enviando requisição para editar usuário:", usuarioSelecionado);
+
+  axios
+    .put(
+      `http://localhost:5272/usuario/editar/${usuarioSelecionado}`,
+      usuarioAtualizado
+    )
+    .then((response) => {
+      console.log("Usuário editado com sucesso:", response.data);
+      carregarUsuarios();
+      setUsuarioSelecionado("");
+      setNovoNome("");
+      setNovoEmail("");
+      setNovaSenha("");
+    })
+    .catch((error) => console.log("Erro ao editar usuário:", error));
+}
 
   return (
     <div>
-      <h1>Edição de Usuários</h1>
-      <Link to="/usuario/listarUsuario">Listar</Link>
+      <h1>Edição de Usuarios</h1>
+      <Link to={"/usuario/listarUsuario"}>Listar</Link>
       <form onSubmit={handleFormSubmit}>
         <div>
-          <label htmlFor="usuario">Usuário</label>
+          <label htmlFor="usuario">Usuario</label>
           <select
             name="usuario"
             id="usuario"
@@ -92,35 +93,36 @@ function EditarUsuario() {
         </div>
         {usuarioSelecionado && (
           <div>
-            <label htmlFor="nome">Nome</label>
-            <input
-              type="text"
-              id="nome"
-              name="nome"
-              value={novoNome}
-              onChange={handleNomeChange}
-            />
-
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={novoEmail}
-              onChange={handleEmailChange}
-            />
-
-            <label htmlFor="senha">Senha</label>
-            <input
-              type="password"
-              id="senha"
-              name="senha"
-              value={novaSenha}
-              onChange={handleSenhaChange}
-            />
+            <div>
+              <label htmlFor="nome">Nome</label>
+              <input
+                type="text"
+                id="nome"
+                value={novoNome}
+                onChange={handleNomeChange}
+              />
+            </div>
+            <div>
+              <label htmlFor="email">Email</label>
+              <input
+                type="text"
+                id="email"
+                value={novoEmail}
+                onChange={handleEmailChange}
+              />
+            </div>
+            <div>
+              <label htmlFor="senha">Senha</label>
+              <input
+                type="text"
+                id="senha"
+                value={novaSenha}
+                onChange={handleSenhaChange}
+              />
+            </div>
+            <button type="submit">Editar</button>
           </div>
         )}
-        <button type="submit">Editar</button>
       </form>
     </div>
   );

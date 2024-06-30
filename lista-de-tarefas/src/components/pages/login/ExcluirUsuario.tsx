@@ -1,40 +1,69 @@
-import { useState } from "react";
+import { useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
 function ExcluirUsuario() {
-  const [usuarioId, setUsuarioId] = useState("");
+    const [usuarios, setUsuarios] = useState([]);
+    const [usuarioSelecionado, setUsuarioSelecionado] = useState("");
 
-  function handleInputChange(event: any) {
-    setUsuarioId(event.target.value);
-  }
+    useEffect(() => {
+        carregarUsuarios();
+    }, []);
 
-  function handleFormSubmit(event: any) {
-    event.preventDefault();
-    axios
-      .delete(`http://localhost:5272/usuario/excluir/${usuarioId}`)
-      .then((response) => console.log(response.data))
-      .catch((error) => console.log(error));
-  }
+    function carregarUsuarios() {
+        axios
+            .get("http://localhost:5272/usuario/listar")
+            .then((response) => {
+                setUsuarios(response.data);
+            })
+            .catch((error) => console.log(error));
+    }
 
-  return (
-    <div>
-      <h1>Exclusão de Usuários</h1>
-      <Link to="/usuario/listar">Listar</Link>
-      <form onSubmit={handleFormSubmit}>
+    function handleInputChange(event: any) {
+        setUsuarioSelecionado(event.target.value);
+    }
+
+    function handleFormSubmit(event: any) {
+        event.preventDefault();
+        if (!usuarioSelecionado) {
+            console.log("Selecione um usuário para excluir.");
+            return;
+        }
+
+        axios
+            .delete(`http://localhost:5272/usuario/excluir/${usuarioSelecionado}`)
+            .then((response) => {
+                console.log("Usuário excluído com sucesso:", response.data);
+                carregarUsuarios();
+            })
+            .catch((error) => console.log(error));
+    }
+
+    return (
         <div>
-          <label>Id</label>
-          <input
-            type="text"
-            name="usuarioId"
-            value={usuarioId}
-            onChange={handleInputChange}
-          />
+            <h1>Exclusão de Usuários</h1>
+            <Link to="/usuario/listar">Listar</Link>
+            <form onSubmit={handleFormSubmit}>
+                <div>
+                    <label htmlFor="usuario">Usuário</label>
+                    <select
+                        id="usuario"
+                        name="usuario"
+                        value={usuarioSelecionado}
+                        onChange={handleInputChange}
+                    >
+                        <option value="">Selecione</option>
+                        {usuarios.map((usuario: any) => (
+                            <option key={usuario.usuarioId} value={usuario.usuarioId}>
+                                {usuario.nome}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+                <button type="submit">Excluir</button>
+            </form>
         </div>
-        <button type="submit">Excluir</button>
-      </form>
-    </div>
-  );
+    );
 }
 
 export default ExcluirUsuario;

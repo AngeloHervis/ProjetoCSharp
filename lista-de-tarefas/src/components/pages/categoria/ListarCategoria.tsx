@@ -22,9 +22,7 @@ function ListarCategoria() {
   return (
     <div>
       <h1>Listagem de Categorias</h1>
-      <Link to="/categoria/cadastrarCategoria">Cadastrar</Link><br />
-      <Link to="/categoria/excluirCategoria">Excluir</Link><br />
-      <Link to="/categoria/editarCategoria">Editar</Link><br />
+      <Link to="/categoria/cadastrarCategoria">Página de cadastro de categorias</Link><br />
       <table>
         <thead>
           <tr>

@@ -1,10 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { Usuario } from "../../../models/Usuario";
 
 function ListarUsuario() {
   const [usuarios, setUsuarios] = useState<Usuario[]>([]);
+
+  useEffect(() => {
+    carregarUsuarios();
+  }, []);
 
   function carregarUsuarios() {
     axios
@@ -18,8 +22,7 @@ function ListarUsuario() {
   return (
     <div>
       <h1>Listagem de Usuários</h1>
-      <Link to="/usuario/cadastrar">Cadastrar</Link>
-      <button onClick={carregarUsuarios}>Listar</button>
+      <Link to="/usuario/cadastrarUsuario">Página de cadastro de usuários</Link>
       <table>
         <thead>
           <tr>

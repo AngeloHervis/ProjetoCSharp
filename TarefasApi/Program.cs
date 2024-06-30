@@ -1,7 +1,6 @@
-using TarefasApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Text.Json.Serialization;
+using TarefasApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,22 +8,17 @@ builder.Services.AddDbContext<AppDbContext>();
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AcessoTotal", builder =>
-        builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
-});
-
-builder.Services.AddControllers().AddJsonOptions(options =>
-{
-    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+    options.AddPolicy(
+        "AcessoTotal",
+        builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()
+    );
 });
 
 var app = builder.Build();
 
-app.UseCors("AcessoTotal");
-
 app.MapGet("/", () => "Tarefas API");
 
-//Endpoints Usuários
+//Endpoints Usuário
 //GET: http://localhost:5272/usuario/listar
 app.MapGet(
     "/usuario/listar",
@@ -41,7 +35,7 @@ app.MapGet(
 //GET: http://localhost:5272/usuario/obter/{id}
 app.MapGet(
     "/usuario/obter/{id}",
-    (AppDbContext context, int id) =>
+    (AppDbContext context, string id) =>
     {
         var usuario = context.Usuarios.Find(id);
         if (usuario == null)
@@ -59,9 +53,10 @@ app.MapPost(
     {
         context.Usuarios.Add(usuario);
         context.SaveChanges();
-        return Results.Created($"/usuario/obter/{usuario.Id}", usuario);
+        return Results.Created($"/usuarios/obter/{usuario.Id}", usuario);
     }
 );
+
 
 //PUT: http://localhost:5272/usuario/editar/{id}
 app.MapPut(
@@ -98,28 +93,23 @@ app.MapDelete(
 );
 
 //Endpoints Tarefas
-//GET: http://localhost:5272/usuario/{usuarioId}/tarefa/listar
+//GET: http://localhost:5272/tarefa/listar
 app.MapGet(
-    "/usuario/{usuarioId}/tarefa/listar",
-    (AppDbContext context, string usuarioId) =>
+    "/tarefa/listar",
+    (AppDbContext context) =>
     {
-        var usuario = context.Usuarios.Find(usuarioId);
-        if (usuario == null)
-        {
-            return Results.NotFound($"Usuário com id {usuarioId} não encontrado");
-        }
         if (context.Tarefas.Count() == 0)
         {
             return Results.NotFound("Nenhuma tarefa encontrada");
         }
-        return Results.Ok(context.Tarefas.Where(t => t.UsuarioId == usuarioId).ToList());
+        return Results.Ok(context.Tarefas.ToList());
     }
 );
 
-//GET: http://localhost:5272/usuario/{usuarioId}/tarefa/obter/{id}
+//GET: http://localhost:5272/tarefa/obter/{id}
 app.MapGet(
-    "/usuario/{usuarioId}/tarefa/obter/{id}",
-    (AppDbContext context, string usuarioId, string id) =>
+    "/tarefa/obter/{id}",
+    (AppDbContext context, string id) =>
     {
         var tarefa = context.Tarefas.Find(id);
         if (tarefa == null)
@@ -130,29 +120,21 @@ app.MapGet(
     }
 );
 
-//POST: http://localhost:5272/usuario/{usuarioId}/tarefa/cadastrar
+//POST: http://localhost:5272/tarefa/cadastrar
 app.MapPost(
-    "/usuario/{usuarioId}/tarefa/cadastrar",
-    (AppDbContext context, string usuarioId, Tarefa tarefa) =>
+    "/tarefa/cadastrar",
+    (AppDbContext context, Tarefa tarefa) =>
     {
-        var usuario = context.Usuarios.Find(usuarioId);
-        if (usuario == null)
-        {
-            return Results.NotFound($"Usuário com id {usuarioId} não encontrado");
-        }
-
-        tarefa.UsuarioId = usuarioId;
         context.Tarefas.Add(tarefa);
         context.SaveChanges();
-        
-        return Results.Created($"/usuario/{usuarioId}/tarefa/obter/{tarefa.TarefaId}", tarefa);
+        return Results.Created($"/tarefas/obter/{tarefa.TarefaId}", tarefa);
     }
 );
 
-//PUT: http://localhost:5272/usuario/{usuarioId}/tarefa/editar/{id}
+//PUT: http://localhost:5272/tarefa/editar/{id}
 app.MapPut(
-    "/usuario/{usuarioId}/tarefa/editar/{id}",
-    (AppDbContext context, string usuarioId, string id, Tarefa tarefa) =>
+    "/tarefa/editar/{id}",
+    (AppDbContext context, string id, Tarefa tarefa) =>
     {
         var tarefaBanco = context.Tarefas.Find(id);
         if (tarefaBanco == null)
@@ -161,17 +143,24 @@ app.MapPut(
         }
         tarefaBanco.Titulo = tarefa.Titulo;
         tarefaBanco.Descricao = tarefa.Descricao;
+        tarefaBanco.Categoria = tarefa.Categoria;
         tarefaBanco.Status = tarefa.Status;
         context.SaveChanges();
         return Results.Ok(tarefaBanco);
     }
 );
 
-//DELETE: http://localhost:5272/usuario/{usuarioId}/tarefa/excluir/{id}
+//DELETE: http://localhost:5272/tarefa/excluir/{id}
 app.MapDelete(
-    "/usuario/{usuarioId}/tarefa/excluir/{id}",
-    (AppDbContext context, string usuarioId, string id) =>
+    "/tarefa/excluir/{id}",
+    (AppDbContext context, string id) =>
     {
+        // Verifica se a tarefa possui subtarefas antes de excluir e exclui as subtarefas também
+        var subtarefas = context.SubTarefas.Where(s => s.TarefaId == id).ToList();
+        if (subtarefas.Count > 0)
+        {
+            context.SubTarefas.RemoveRange(subtarefas);
+        }
         var tarefa = context.Tarefas.Find(id);
         if (tarefa == null)
         {
@@ -218,7 +207,7 @@ app.MapPost(
     {
         context.Categorias.Add(categoria);
         context.SaveChanges();
-        return Results.Created($"/categoria/obter/{categoria.CategoriaId}", categoria);
+        return Results.Created($"/categorias/obter/{categoria.CategoriaId}", categoria);
     }
 );
 
@@ -243,6 +232,12 @@ app.MapDelete(
     "/categoria/excluir/{id}",
     (AppDbContext context, string id) =>
     {
+        // Verifica se a categoria está sendo usada em alguma tarefa antes de excluir
+        var tarefa = context.Tarefas.FirstOrDefault(t => t.Categoria.CategoriaId == id);
+        if (tarefa != null)
+        {
+            return Results.BadRequest("Categoria não pode ser excluída, pois está sendo usada em uma tarefa");
+        }
         var categoria = context.Categorias.Find(id);
         if (categoria == null)
         {
@@ -254,28 +249,11 @@ app.MapDelete(
     }
 );
 
-//DELETE pelo nome da categoria
-//DELETE: http://localhost:5272/categoria/excluir/nome/{nome}
-app.MapDelete(
-    "/categoria/excluir/nome/{nome}",
-    (AppDbContext context, string nome) =>
-    {
-        var categoria = context.Categorias.FirstOrDefault(c => c.Nome == nome);
-        if (categoria == null)
-        {
-            return Results.NotFound($"Categoria com nome {nome} não encontrada");
-        }
-        context.Categorias.Remove(categoria);
-        context.SaveChanges();
-        return Results.NoContent();
-    }
-);
-
 //Endpoints SubTarefas
-//GET: http://localhost:5272/usuario/{usuarioId}/tarefa/{tarefaId}/subtarefa/listar
+//GET: http://localhost:5272/tarefa/{tarefaId}/subtarefa/listar
 app.MapGet(
-    "/usuario/{usuarioId}/tarefa/{tarefaId}/subtarefa/listar",
-    (AppDbContext context, string usuarioId, string tarefaId) =>
+    "/tarefa/{tarefaId}/subtarefa/listar",
+    (AppDbContext context, string tarefaId) =>
     {
         var tarefa = context.Tarefas.Find(tarefaId);
         if (tarefa == null)
@@ -290,10 +268,10 @@ app.MapGet(
     }
 );
 
-//GET: http://localhost:5272/usuario/{usuarioId}/tarefa/{tarefaId}/subtarefa/obter/{id}
+//GET: http://localhost:5272/tarefa/{tarefaId}/subtarefa/obter/{id}
 app.MapGet(
-    "/usuario/{usuarioId}/tarefa/{tarefaId}/subtarefa/obter/{id}",
-    (AppDbContext context, string usuarioId, string tarefaId, string id) =>
+    "/tarefa/{tarefaId}/subtarefa/obter/{id}",
+    (AppDbContext context, string tarefaId, string id) =>
     {
         var subTarefa = context.SubTarefas.Find(id);
         if (subTarefa == null)
@@ -304,29 +282,30 @@ app.MapGet(
     }
 );
 
-//POST: http://localhost:5272/usuario/{usuarioId}/tarefa/{tarefaId}/subtarefa/cadastrar
+//POST: http://localhost:5272/tarefa/{tarefaId}/subtarefa/cadastrar
 app.MapPost(
-    "/usuario/{usuarioId}/tarefa/{tarefaId}/subtarefa/cadastrar",
-    (AppDbContext context, string usuarioId, string tarefaId, SubTarefa subTarefa) =>
+    "/tarefa/{tarefaId}/subtarefa/cadastrar",
+    (AppDbContext context, string tarefaId, SubTarefa subTarefa) =>
     {
         var tarefa = context.Tarefas.Find(tarefaId);
         if (tarefa == null)
         {
             return Results.NotFound($"Tarefa com id {tarefaId} não encontrada");
         }
-
         subTarefa.TarefaId = tarefaId;
         context.SubTarefas.Add(subTarefa);
         context.SaveChanges();
-        
-        return Results.Created($"/usuario/{usuarioId}/tarefa/{tarefaId}/subtarefa/obter/{subTarefa.SubTarefaId}", subTarefa);
+        return Results.Created(
+            $"/tarefas/{tarefaId}/subtarefas/obter/{subTarefa.SubTarefaId}",
+            subTarefa
+        );
     }
 );
 
-//PUT: http://localhost:5272/usuario/{usuarioId}/tarefa/{tarefaId}/subtarefa/editar/{id}
+//PUT: http://localhost:5272/tarefa/{tarefaId}/subtarefa/editar/{id}
 app.MapPut(
-    "/usuario/{usuarioId}/tarefa/{tarefaId}/subtarefa/editar/{id}",
-    (AppDbContext context, string usuarioId, string tarefaId, string id, SubTarefa subTarefa) =>
+    "/tarefa/{tarefaId}/subtarefa/editar/{id}",
+    (AppDbContext context, string tarefaId, string id, SubTarefa subTarefa) =>
     {
         var subTarefaBanco = context.SubTarefas.Find(id);
         if (subTarefaBanco == null)
@@ -341,10 +320,10 @@ app.MapPut(
     }
 );
 
-//DELETE: http://localhost:5272/usuario/{usuarioId}/tarefa/{tarefaId}/subtarefa/excluir/{id}
+//DELETE: http://localhost:5272/tarefa/{tarefaId}/subtarefa/excluir/{id}
 app.MapDelete(
-    "/usuario/{usuarioId}/tarefa/{tarefaId}/subtarefa/excluir/{id}",
-    (AppDbContext context, string usuarioId, string tarefaId, string id) =>
+    "/tarefa/{tarefaId}/subtarefa/excluir/{id}",
+    (AppDbContext context, string tarefaId, string id) =>
     {
         var subTarefa = context.SubTarefas.Find(id);
         if (subTarefa == null)
@@ -357,4 +336,5 @@ app.MapDelete(
     }
 );
 
+app.UseCors("AcessoTotal");
 app.Run();

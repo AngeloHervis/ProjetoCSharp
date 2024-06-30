@@ -1,14 +1,10 @@
-import { Categoria } from "./Categoria";
-import { SubTarefa } from "./SubTarefa";
-
 export interface Tarefa {
   tarefaId: string;
+  usuarioId: string;
+  categoriaId: string;
   titulo: string;
   descricao: string;
-  criadoEm: string;
-  categoriaId?: string;
-  categoria?: Categoria;
+  criadoEm: Date;
   status: string;
-  usuarioId: string;
-  subTarefas?: SubTarefa[];
+  categoria: string;
 }

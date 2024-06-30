@@ -11,7 +11,7 @@ using TarefasApi.Models;
 namespace TarefasApi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240629233003_InitialCreate")]
+    [Migration("20240630193725_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
