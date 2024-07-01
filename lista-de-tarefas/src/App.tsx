@@ -16,6 +16,7 @@ import CadastrarSubTarefa from "./components/pages/subtarefa/CadastrarSubTarefa"
 import EditarSubTarefa from "./components/pages/subtarefa/EditarSubTarefa";
 import ExcluirSubTarefa from "./components/pages/subtarefa/ExcluirSubTarefa";
 import ListarSubTarefa from "./components/pages/subtarefa/ListarSubTarefa";
+import "./style/App.css";
 
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 

@@ -39,36 +39,36 @@ function EditarUsuario() {
     setNovaSenha(event.target.value);
   }
 
-function handleFormSubmit(event: React.FormEvent<HTMLFormElement>) {
-  event.preventDefault();
-  if (!usuarioSelecionado || !novoNome || !novoEmail || !novaSenha) {
-    console.log("Erro: Todos os campos são obrigatórios.");
-    return;
+  function handleFormSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (!usuarioSelecionado || !novoNome || !novoEmail || !novaSenha) {
+      console.log("Erro: Todos os campos são obrigatórios.");
+      return;
+    }
+
+    const usuarioAtualizado = {
+      nome: novoNome,
+      email: novoEmail,
+      senha: novaSenha,
+    };
+
+    console.log("Enviando requisição para editar usuário:", usuarioSelecionado);
+
+    axios
+      .put(
+        `http://localhost:5272/usuario/editar/${usuarioSelecionado}`,
+        usuarioAtualizado
+      )
+      .then((response) => {
+        console.log("Usuário editado com sucesso:", response.data);
+        carregarUsuarios();
+        setUsuarioSelecionado("");
+        setNovoNome("");
+        setNovoEmail("");
+        setNovaSenha("");
+      })
+      .catch((error) => console.log("Erro ao editar usuário:", error));
   }
-
-  const usuarioAtualizado = {
-    nome: novoNome,
-    email: novoEmail,
-    senha: novaSenha,
-  };
-
-  console.log("Enviando requisição para editar usuário:", usuarioSelecionado);
-
-  axios
-    .put(
-      `http://localhost:5272/usuario/editar/${usuarioSelecionado}`,
-      usuarioAtualizado
-    )
-    .then((response) => {
-      console.log("Usuário editado com sucesso:", response.data);
-      carregarUsuarios();
-      setUsuarioSelecionado("");
-      setNovoNome("");
-      setNovoEmail("");
-      setNovaSenha("");
-    })
-    .catch((error) => console.log("Erro ao editar usuário:", error));
-}
 
   return (
     <div>

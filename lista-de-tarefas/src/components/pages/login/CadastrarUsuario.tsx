@@ -6,7 +6,7 @@ function CadastrarUsuario() {
   const [usuario, setUsuario] = useState({
     nome: "",
     email: "",
-    senha: ""
+    senha: "",
   });
 
   function handleInputChange(event: any) {

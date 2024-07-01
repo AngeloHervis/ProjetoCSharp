@@ -2,9 +2,6 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-//Precisa consumir a API para excluir uma tarefa
-//DELETE: http://localhost:5272/tarefa/excluir/{id}
-
 function ExcluirTarefa() {
   const [tarefas, setTarefas] = useState([]);
   const [tarefaSelecionada, setTarefaSelecionada] = useState("");

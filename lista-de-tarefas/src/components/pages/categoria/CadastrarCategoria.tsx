@@ -4,7 +4,7 @@ import axios from "axios";
 
 function CadastrarCategoria() {
   const [categoria, setCategoria] = useState({
-    nome: ""
+    nome: "",
   });
 
   function handleInputChange(event: any) {

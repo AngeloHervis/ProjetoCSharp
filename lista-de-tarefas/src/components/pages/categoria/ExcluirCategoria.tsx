@@ -66,6 +66,4 @@ function ExcluirCategoria() {
   );
 }
 
-//Se tiver tarefas associadas a categoria, não será possível excluir a categoria.
-
 export default ExcluirCategoria;

@@ -3,19 +3,30 @@ import { SubTarefa } from "../../../models/SubTarefa";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-//GET: http://localhost:5272/tarefa/{tarefaId}/subtarefa/listar
-
 function ListarSubTarefa() {
-  const [subtarefas, setSubTarefas] = useState<SubTarefa[]>([]);
-  const [tarefaId, setTarefaId] = useState("");
+  const [subTarefas, setSubTarefas] = useState<SubTarefa[]>([]);
+  const [tarefas, setTarefas] = useState([]);
+  const [tarefaSelecionada, setTarefaSelecionada] = useState("");
 
   useEffect(() => {
-    carregarSubTarefas();
+    carregarTarefas();
   }, []);
 
-  function carregarSubTarefas() {
+  function carregarTarefas() {
     axios
-      .get(`http://localhost:5272/tarefa/${tarefaId}/subtarefa/listar`)
+      .get("http://localhost:5272/tarefa/listar")
+      .then((response) => {
+        setTarefas(response.data);
+      })
+      .catch((error) => console.log(error));
+  }
+
+  function handleTarefaChange(event: React.ChangeEvent<HTMLSelectElement>) {
+    setTarefaSelecionada(event.target.value);
+    axios
+      .get(
+        `http://localhost:5272/tarefa/${event.target.value}/subtarefa/listar`
+      )
       .then((response) => {
         setSubTarefas(response.data);
       })
@@ -25,32 +36,38 @@ function ListarSubTarefa() {
   return (
     <div>
       <h1>Listagem de Subtarefas</h1>
-      <Link to="/tarefa/listar">Voltar</Link>
-      <form>
-        <div>
-          <label>Tarefa Id</label>
-          <input
-            type="text"
-            value={tarefaId}
-            onChange={(event) => setTarefaId(event.target.value)}
-          />
-        </div>
-        <button type="button" onClick={carregarSubTarefas}>
-          Buscar
-        </button>
-      </form>
+      <Link to="/subtarefa/cadastrarSubTarefa">
+        Página de cadastro de subtarefas
+      </Link>
+      <br />
+      <label htmlFor="tarefa">Tarefa</label>
+      <select
+        id="tarefa"
+        name="tarefa"
+        value={tarefaSelecionada}
+        onChange={handleTarefaChange}
+      >
+        <option value="">Selecione</option>
+        {tarefas.map((tarefa: any) => (
+          <option key={tarefa.tarefaId} value={tarefa.tarefaId}>
+            {tarefa.titulo}
+          </option>
+        ))}
+      </select>
       <table>
         <thead>
           <tr>
             <th>Id</th>
+            <th>Título</th>
             <th>Descrição</th>
           </tr>
         </thead>
         <tbody>
-          {subtarefas.map((subtarefa) => (
-            <tr key={subtarefa.subTarefaId}>
-              <td>{subtarefa.subTarefaId}</td>
-              <td>{subtarefa.descricao}</td>
+          {subTarefas.map((subTarefa) => (
+            <tr key={subTarefa.subTarefaId}>
+              <td>{subTarefa.subTarefaId}</td>
+              <td>{subTarefa.titulo}</td>
+              <td>{subTarefa.descricao}</td>
             </tr>
           ))}
         </tbody>

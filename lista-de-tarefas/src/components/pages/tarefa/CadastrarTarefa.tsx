@@ -1,66 +1,53 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { Tarefa } from "../../../models/Tarefa";
+import { Categoria } from "../../../models/Categoria";
 
 function CadastrarTarefa() {
-  const [tarefa, setTarefa] = useState({
-    titulo: "",
-    descricao: "",
-  });
-  const [categorias, setCategorias] = useState([]);
-  const [categoriaSelecionada, setCategoriaSelecionada] = useState("");
+  const [categorias, setCategorias] = useState<Categoria[]>([]);
+  const [titulo, setTitulo] = useState("");
+  const [descricao, setDescricao] = useState("");
+  const [categoriaId, setCategoriaId] = useState("");
 
   useEffect(() => {
-    carregarCategorias();
+    axios.get("http://localhost:5272/categoria/listar").then((response) => {
+      setCategorias(response.data);
+    });
   }, []);
 
-  function carregarCategorias() {
-    axios
-      .get("http://localhost:5272/categoria/listar")
-      .then((response) => {
-        setCategorias(response.data);
-      })
-      .catch((error) => console.log(error));
-  }
-
-  function handleInputChange(
-    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) {
-    const { name, value } = event.target;
-    if (name === "categoria") {
-      setCategoriaSelecionada(value);
-    } else {
-      setTarefa({ ...tarefa, [name]: value });
-    }
-  }
-
-  function handleFormSubmit(event: React.FormEvent<HTMLFormElement>) {
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    axios
-      .post(`http://localhost:5272/usuario/{usuarioId}/tarefa/cadastrar`, {
-        titulo: tarefa.titulo,
-        descricao: tarefa.descricao,
-        categoriaId: categoriaSelecionada,
-      })
-      .then((response) => {
-        console.log("Tarefa cadastrada com sucesso:", response.data);
-        // Limpar o formulário ou redirecionar para outra página, se necessário
-      })
-      .catch((error) => console.log(error));
-  }
+
+    const tarefa: Omit<
+      Tarefa,
+      "tarefaId" | "usuarioId" | "criadoEm" | "status" | "categoria"
+    > = {
+      titulo: titulo,
+      descricao: descricao,
+      categoriaId: categoriaId,
+    };
+
+    try {
+      await axios.post("http://localhost:5272/tarefa/cadastrar", tarefa);
+      alert("Tarefa cadastrada com sucesso!");
+    } catch (error) {
+      alert("Erro ao cadastrar tarefa: " + error);
+    }
+  };
 
   return (
     <div>
-      <h1>Cadastro de Tarefas</h1>
-      <Link to="/tarefa/listar">Listar</Link>
-      <form onSubmit={handleFormSubmit}>
+      <h1>Cadastrar Tarefa</h1>
+      <Link to="/tarefa">Voltar</Link>
+      <form onSubmit={handleSubmit}>
         <div>
-          <label>Título</label>
+          <label>titulo</label>
           <input
             type="text"
             name="titulo"
-            value={tarefa.titulo}
-            onChange={handleInputChange}
+            value={titulo}
+            onChange={(e) => setTitulo(e.target.value)}
           />
         </div>
         <div>
@@ -68,19 +55,19 @@ function CadastrarTarefa() {
           <input
             type="text"
             name="descricao"
-            value={tarefa.descricao}
-            onChange={handleInputChange}
+            value={descricao}
+            onChange={(e) => setDescricao(e.target.value)}
           />
         </div>
         <div>
           <label>Categoria</label>
           <select
-            name="categoria"
-            value={categoriaSelecionada}
-            onChange={handleInputChange}
+            name="categoriaId"
+            value={categoriaId}
+            onChange={(e) => setCategoriaId(e.target.value)}
           >
             <option value="">Selecione uma categoria</option>
-            {categorias.map((categoria: any) => (
+            {categorias.map((categoria) => (
               <option key={categoria.categoriaId} value={categoria.categoriaId}>
                 {categoria.nome}
               </option>
